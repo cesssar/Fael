@@ -1,0 +1,12 @@
+{
+    "name": "cesssar/lib",
+    "description": "Trabalho Fael",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Cesar Steinmeier",
+            "email": "cesar@steinmeier.com.br"
+        }
+    ],
+    "require": {}
+}
