@@ -8,5 +8,10 @@
             "email": "cesar@steinmeier.com.br"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Classes\\":"../classes"
+        }
+    }
 }
