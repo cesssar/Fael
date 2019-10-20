@@ -1,8 +1,7 @@
 <?php
 header("Content-Type: text/html; charset=utf-8");
 include("config/config.php");
-include("lib/vendor/autoload.php");
-use Classes\ClassTeste;
+
 
 ?>
 
@@ -11,9 +10,20 @@ use Classes\ClassTeste;
 <head>
     <meta charset="UTF-8">
     <title>Fael - Desenvolvimento Web</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo DIRCSS; ?>estilos.css">
 </head>
 <body>
-<img src="<?php echo DIRIMG."logo.png"?>"/>
+<div class="topFaixa float w100">
+    :: Login
+</div>
+
+<form name="formLogin" id="formLogin" action="" method="post">
+    <div class="login float center">
+        <input class="float w100 h40" type="text" id="usuario" placeholder="Digite seu usuário" required>
+        <input class="float w100 h40" type="password" id="senha" placeholder="Digite sua senha" required>
+        <input class="inlineBlock h40" type="submit" value="Entrar">
+    </div>
+</form>
 <?php
 
 ?>
