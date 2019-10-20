@@ -11,9 +11,4 @@ define('DIRCSS',DIRPAGE."lib/css/");
 define('DIRJS',DIRPAGE."lib/js/");
 define('DIRLIB',DIRPAGE."lib/");
 
-#acesso ao banco de dados
-define('HOST',"localhost");
-define('BD',"fael");
-define('USER',"phpmyadmin");
-define('PASS',"ozzy");
 ?>

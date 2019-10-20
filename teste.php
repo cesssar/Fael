@@ -1,13 +1,14 @@
 <?php
-require_once "config/config.php";
-require_once "classes/conexao.php";
-require_once "classes/crudUsuario.php";
+require_once "lib/conexao.php";
+require_once "lib/crud.php";
 
-$con = crudUsuario::getInstancia(Conexao::getInstance());
+$con = getConexao();
 
 $usuario= "tobias";
-$senha = "ozzy";
+$senha = "machado";
 
-echo $con->insertUsuario($usuario,$senha);
+//echo var_dump(selectUsuario($usuario,$senha,$con));
+//echo var_dump(insertUpdatePolo('Centro','centro@steinmeier.com.br','Porto Alegre','RS','90020011',$con));
 
+//echo var_dump(insertUpdateAluno('00201749009','Cesar','Steinmeier',19800320,'Porto Alegre','RS',$con));
 ?>
