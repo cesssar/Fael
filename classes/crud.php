@@ -15,7 +15,7 @@ class Crud extends PDO{
         $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     
-    private function executaQuery($sql){
+    public function executaQuery($sql){
         $query = $this->conexao->prepare($sql);
         $query->execute();
         return $query->rowCount();

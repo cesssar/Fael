@@ -1,54 +1,53 @@
 <?php
 
 class Polos{
-
-}
-class Usuario{
     private $codigo;
     private $nome;
     private $email;
     private $cidade;
-    private $estado;
+    private $uf;
     private $cep;
 
     public function getCodigo(){    return $this->codigo;   }
     public function getNome(){      return $this->nome;     }
     public function getEmail(){     return $this->email;    }
     public function getCidade(){    return $this->cidade;   }
-    public function getEstado(){    return $this->estado;   }
+    public function getUF(){        return $this->uf;       }
     public function getCep(){       return $this->cep;      }
 
     public function setNome($n){    $this->nome = $n;       }
     public function setEmail($e){   $this->email = $e;      }
     public function setCidade($c){  $this->cidade = $c;     }
-    public function setEstado($uf){ $this->estado = $uf;    }
+    public function setUF($uf){     $this->uf = $uf;        }
     public function setCep($cep){   $this->cep = $cep;      }
 
-
-    /*
-    public function recuperaUsuario($i){
-        $conn = new Crud();
-        $resultado = $conn->select("SELECT * FROM usuarios WHERE id=".$i);
-        if(count($resultado)>0){
+    public function recuperaPolo($i){
+        $con = new Crud();
+        $resultado = $con->select("SELECT * FROM polos WHERE codigo=".$i);
+        if(count($resultado) > 0 ){
             $row = $resultado[0];
-            $this->setId($row['id']);
-            $this->setUsuario($row['usuario']);
+            $this->codigo = $row['codigo'];
+            $this->nome = $row['nome'];
+            $this->email = $row['email'];
+            $this->cidade = $row['cidade'];
+            $this->uf = $row['uf'];
+            $this->cep = $row['cep'];
         }
     }
 
-    public function InsereUsuario($usuario,$senha){
-        $conn = new Crud();
-        $resultado = $conn->select("SELECT id FROM usuarios WHERE usuario='".$usuario."'");
-        if(count($resultado < 1)){
-            $r = $conn->executaQuery("INSERT INTO usuarios(usuario,senha) VALUES('".$usuario."','".$senha."')");
+    public function InserePolo($objPolo){
+        $con = new Crud();
+        $resultado = $con->select("SELECT codigo FROM polos WHERE nome like '%".$objPolo->getNome()."%'");
+        if(count($resultado) < 1){
+            $sql = "INSERT INTO polos(nome,email,cidade,uf,cep) VALUES('".$objPolo->getNome();
+            $sql = $sql."','".$objPolo->getEmail();
+            $sql = $sql."','".$objPolo->getCidade();
+            $sql = $sql."','".$objPolo->getUF();
+            $sql = $sql."','".$objPolo->getCep();
+            $sql = $sql."')";
+            $r = $con->executaQuery($sql);
             return $r;
         }
     }
-
-    public function AlteraSenha($id, $senha){
-        $conn = new Crud();
-        $r = $conn->executaQuery("UPDATE usuarios SET senha='".$senha."' WHERE id=".$id);
-    }
-    */
 }
 ?>
