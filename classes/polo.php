@@ -1,6 +1,6 @@
 <?php
 
-class Polos{
+class Polo{
     private $codigo;
     private $nome;
     private $email;
@@ -48,6 +48,12 @@ class Polos{
             $r = $con->executaQuery($sql);
             return $r;
         }
+    }
+
+    public function getLista(){
+        $con = new Crud();
+        $resultado = $con->select("SELECT * FROM polos ORDER BY nome");
+        return $resultado;
     }
 }
 ?>
