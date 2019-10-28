@@ -16,9 +16,9 @@ class Usuario{
 
     public function setSenha($s){ $this->senha = $s; }
 
-    public function recuperaUsuario($i){
+    public function recuperaUsuario($usuario,$senha){
         $conn = new Crud();
-        $resultado = $conn->select("SELECT * FROM usuarios WHERE id=".$i);
+        $resultado = $conn->select("SELECT * FROM usuarios WHERE usuario='".$usuario."' and senha='".$senha."'");
         if(count($resultado)>0){
             $row = $resultado[0];
             $this->setId($row['id']);
