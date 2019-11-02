@@ -35,7 +35,7 @@ class Polo{
         }
     }
 
-    public function InserePolo($objPolo){
+    public function InsereAtualizaPolo($objPolo){
         $con = new Crud();
         $resultado = $con->select("SELECT codigo FROM polos WHERE nome like '%".$objPolo->getNome()."%'");
         if(count($resultado) < 1){
@@ -45,8 +45,16 @@ class Polo{
             $sql = $sql."','".$objPolo->getUF();
             $sql = $sql."','".$objPolo->getCep();
             $sql = $sql."')";
-            $r = $con->executaQuery($sql);
-            return $r;
+            $con->executaQuery($sql);
+        }else{
+            $sql = "UPDATE polos SET nome='".$objPolo->getNome();
+            $sql = $sql."', email='".$objPolo->getEmail();
+            $sql = $sql."', cidade='".$objPolo->getCidade();
+            $sql = $sql."', uf='".$objPolo->getUF();
+            $sql = $sql."', cep='".$objPolo->getCep()."' WHERE codigo=";
+            $linha = $resultado[0];
+            $sql = $sql.$linha['codigo'];
+            $con->executaQuery($sql);
         }
     }
 

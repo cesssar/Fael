@@ -8,17 +8,101 @@ if(!isset($_SESSION['usuario'])){
 }
 ?>
 
+<?php
+function getDataBR($dateSql){
+    $ano= substr($dateSql, 0,4);
+    $mes= substr($dateSql, 5,2);
+    $dia= substr($dateSql, 8,2);
+    return $dia.'/'.$mes.'/'.$ano;
+}
+
+function getDataMySql($dataBR){
+    $ano= substr($dataBR,6,4);
+    $mes= substr($dataBR,3,2);
+    $dia= substr($dataBR,0,2);
+    return $ano.'-'.$mes.'-'.$dia;
+}
+
+require_once("classes/crud.php");
+require_once("classes/aluno.php");
+
+//trata formulario
+if(!empty($_POST["gravar"])){
+    $aluno = new Aluno();
+    $aluno->setCPF($_POST["cpf"]);
+    $aluno->setNome($_POST["nome"]);
+    $aluno->setSobrenome($_POST["sobrenome"]);
+    $aluno->setNascimento(getDataMySql($_POST["nascimento"]));
+    $aluno->setCidade($_POST["cidade"]);
+    $aluno->setUF($_POST["estado"]);
+    $aluno->InsereAtualizaAluno($aluno);
+}
+?>
+
 <h1 class="heading">Cadastro dos Alunos<br/>‍</h1>
 <div class="container w-container">
     <div class="w-form">
         <form id="wf-form-frmAlunos" name="wf-form-frmAlunos" data-name="frmAlunos" method="post">
-            <label for="codigo-3">Código</label><input type="number" class="w-input" maxlength="256" name="codigo" data-name="codigo" id="codigo-3"/>
-            <label for="nome-3">Nome</label><input type="text" class="w-input" maxlength="256" name="nome" data-name="nome" id="nome-3" required=""/>
-            <label for="sobrenome">Sobrenome</label><input type="text" class="w-input" maxlength="256" name="sobrenome" data-name="sobrenome" id="sobrenome"/>
-            <label for="nascimento">Data nascimento</label><input type="text" class="w-input" maxlength="256" name="nascimento" data-name="nascimento" id="nascimento"/>
-            <label for="cidade-2">Cidade</label><input type="text" class="w-input" maxlength="256" name="cidade" data-name="cidade" id="cidade-2"/>
-            <label for="estado-3">Estado</label><input type="text" class="w-input" maxlength="256" name="estado" data-name="estado" id="estado-3"/>
-            <input type="submit" value="Gravar" data-wait="Por favor, aguardar..." class="submit-button w-button"/>
+            <?php
+            //recupera dados do aluno para edição
+            $a = null;
+            $cpf = null;
+            $nome = null;
+            $sobrenome = null;
+            $nascimento = null;
+            $cidade = null;
+            $estado = null;
+            if(!empty($_GET['id'])){
+                $a = new Aluno();
+                $a->recuperaAluno($_GET['id']);
+                $cpf = $a->getCPF();
+                $nome = $a->getnome();
+                $sobrenome = $a->getSobrenome();
+                $nascimento = $a->getNascimento();
+                $cidade = $a->getCidade();
+                $estado = $a->getUF();
+            }
+            ?>
+            <label for="cpf">CPF</label><input type="text" class="w-input" maxlength="11" name="cpf" data-name="cpf" id="cpf required="" value="<?php echo $cpf; ?>" <?php if(!empty($cpf)){ echo "readonly='true'"; } ?>/>
+            <label for="nome">Nome</label><input type="text" class="w-input" maxlength="100" name="nome" data-name="nome" id="nome-3" required="" value="<?php echo $nome; ?>"/>
+            <label for="sobrenome">Sobrenome</label><input type="text" class="w-input" maxlength="200" name="sobrenome" data-name="sobrenome" id="sobrenome" value="<?php echo $sobrenome; ?>"/>
+            <label for="nascimento">Data nascimento</label><input type="text" class="w-input" maxlength="10" name="nascimento" data-name="nascimento" id="nascimento" value="<?php if(!empty($nascimento)){ echo getDataBR($nascimento); } ?>"/>
+            <label for="cidade">Cidade</label><input type="text" class="w-input" maxlength="100" name="cidade" data-name="cidade" id="cidade" value="<?php echo $cidade; ?>"/>
+            <label for="estado">Estado</label><input type="text" class="w-input" maxlength="2" name="estado" data-name="estado" id="estado" value="<?php echo $estado; ?>"/>
+            <input type="submit" value="Gravar" name="gravar" class="submit-button w-button"/>
         </form>
     </div>
+</div>
+
+<div class="container w-container">
+    <table>
+        <tr>
+            <th>Código</th>
+            <th>CPF</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Data Nascimento</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+        <?php
+            $aa = new Aluno();
+            $resultado = $aa->getLista();
+            foreach($resultado as $linha){
+                echo "<tr>";
+                echo "<td>".$linha["id"]."</td>";
+                echo "<td>".$linha["cpf"]."</td>";
+                echo "<td>".$linha["nome"]."</td>";
+                echo "<td>".$linha["sobrenome"]."</td>";
+                echo "<td>".getDataBR($linha["nascimento"])."</td>";
+                echo "<td>".$linha["cidade"]."</td>";
+                echo "<td>".$linha["uf"]."</td>";
+                echo "<td><a href='index.php?pagina=alunos&id=".$linha["id"]."'>editar</a></td>";
+                echo "</tr>";
+            }
+        ?>
+        </tr>
+    </table>
 </div>

@@ -22,33 +22,55 @@ class Aluno{
     public function getCidade(){ return $this->cidade; }
     public function setCidade($ci){ $this->cidade = $ci; }
     public function getUF(){return $this->uf; }
-    public function setUF($uf){ $this->uf; }
+    public function setUF($uf){ $this->uf = $uf; }
 
+    
     public function getLista(){
         $con = new Crud();
-        $resultado = $con->select("SELECT * FROM polos ORDER BY nome");
+        $resultado = $con->select("SELECT * FROM alunos ORDER BY id");
         return $resultado;
     }
 
     public function recuperaAluno($i){
         $con = new Crud();
-        $resultado = $con->select("SELECT * FROM alunos WHERE id =".$i);
-        return $resultado;
+        $s = "SELECT * FROM alunos WHERE id =".$i;
+        $resultado = $con->select($s);
+        if(count($resultado)>0){
+            $row = $resultado[0];
+            $this->id = $row['id'];
+            $this->cpf = $row['cpf'];
+            $this->nome = $row['nome'];
+            $this->sobrenome = $row['sobrenome'];
+            $this->nascimento = $row['nascimento'];
+            $this->cidade = $row['cidade'];
+            $this->uf = $row['uf'];
+        }
     }
 
-    public function InsereAluno($objAluno){
+    public function InsereAtualizaAluno($objAluno){
         $con = new Crud();
-        $resultado = $con->select("SELECT codigo FROM alunos WHERE cpf = " . $objAluno->getCPF());
+        $s = "SELECT id FROM alunos WHERE cpf = '" . $objAluno->getCPF()."'";
+        $resultado = $con->select($s);
+        
         if(count($resultado) < 1){
-            $sql = "INSERT INTO alunos(cpf,nome,sobrenome,nascimento,cidade,uf) VALUES(".$objAluno->getCPF();
-            $sql = $sql.",'".$objAluno->getNome();
+            $sql = "INSERT INTO alunos(cpf,nome,sobrenome,nascimento,cidade,uf) VALUES('".$objAluno->getCPF();
+            $sql = $sql."','".$objAluno->getNome();
             $sql = $sql."','".$objAluno->getSobrenome();
             $sql = $sql."','".$objAluno->getNascimento();
             $sql = $sql."','".$objAluno->getCidade();
             $sql = $sql."','".$objAluno->getUF();
             $sql = $sql."');";
-            $r = $con->executaQuery($sql);
-            return $r;
+            $con->executaQuery($sql);
+        }else{
+            $sql = "UPDATE alunos SET cpf=".$objAluno->getCPF();
+            $sql = $sql.", nome='".$objAluno->getNome();
+            $sql = $sql."', sobrenome='".$objAluno->getSobrenome();
+            $sql  = $sql."', nascimento='".$objAluno->getNascimento();
+            $sql = $sql."', cidade='".$objAluno->getCidade();
+            $sql = $sql."', uf='".$objAluno->getUF();
+            $linha = $resultado[0];
+            $sql = $sql."' WHERE id=".$linha['id'];
+            $con->executaQuery($sql);
         }
     }
 
