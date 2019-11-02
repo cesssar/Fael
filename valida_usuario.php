@@ -12,7 +12,7 @@ if(!empty($usuario) && !empty($senha)){
     $usu->recuperaUsuario($usuario,$senha);
     if(strlen($usu->getUsuario())>0){
         $_SESSION['usuario'] = $usu->getUsuario();
-        $_SESSION['senha'] = $usu->getSenha();
+        $_SESSION['id'] = $usu->getSenha();
         header('location:index.php?pagina=polos');
     }else{
         unset($_SESSION['id']);

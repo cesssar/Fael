@@ -1,3 +1,12 @@
+<?php
+//volta para login se nao reconhecer usuario
+session_start();
+
+if(!isset($_SESSION['usuario'])){
+    $_SESSION['msg'] = 'Por favor, faça seu login.';
+    header('location:index.php?pagina=login');
+}
+?>
 
 <h1 class="heading">Cadastro dos Alunos<br/>‍</h1>
 <div class="container w-container">

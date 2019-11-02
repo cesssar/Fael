@@ -47,6 +47,7 @@
                 case "alunos": include("alunos.php"); break;
                 case "disciplinas"; include("disciplinas.php"); break;
                 case "sair"; include("sair.php"); break;
+                case "": include("login.php"); break;
             }
         ?>
 
