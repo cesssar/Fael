@@ -11,6 +11,7 @@ if(!isset($_SESSION['usuario'])){
 <?php
 require_once("classes/crud.php");
 require_once("classes/disciplina.php");
+require_once("classes/polo.php");
 
 //trata formulario
 if(!empty($_POST["gravar"])){
@@ -23,63 +24,78 @@ if(!empty($_POST["gravar"])){
 
 ?>
 
-<h1 class="heading">Cadastro dos Polos Fael<br/>‍</h1>
+<h1 class="heading">Cadastro de Disciplinas<br/>‍</h1>
 <div class="container w-container">
     <div class="w-form">
-        <form id="wf-form-frmPolos" name="wf-form-frmPolos" data-name="frmPolos" method="post" action="index.php?pagina=polos">
+        <form id="wf-form-frmDisciplinas" name="wf-form-frmDisciplinas" data-name="frmDisciplinas" method="post" action="index.php?pagina=disciplinas">
             <?php
-            //recupera dados do polo para edição
-            $pp = null;
-            $nome = null;
-            $email = null;
-            $cidade = null;
-            $estado = null;
-            $cep = null;
+            //recupera dados da disciplina para edição
+            $d = null;
+            $codigo = null;
+            $disciplina = null;
+            $professor = null;
+            $polo = null;
             if(!empty($_GET['codigo'])){
-                $pp = new Polo();
-                $pp->recuperaPolo($_GET['codigo']);
-                $nome = $pp->getNome();
-                $email = $pp->getEmail();
-                $cidade = $pp->getCidade();
-                $estado = $pp->getUF();
-                $cep = $pp->getCEP();
+                $dd = new Disciplina();
+                $dd->recuperaDisciplina($_GET['codigo']);
+                $codigo = $dd->getCodigo();
+                $disciplina = $dd->getDisciplina();
+                $professor = $dd->getProfessor();
+                $polo = $dd->getPolo();
             }
             ?>
-            <label for="nome">Nome do Polo</label>
-            <input type="text" class="w-input" maxlength="100" name="nome" data-name="nome" id="nome" required="" value="<?php echo $nome; ?>" <?php if(!empty($nome)){ echo "readonly='true'"; } ?>/>
-            <label for="email">e-mail</label><input type="email" class="w-input" maxlength="100" name="email" data-name="email" id="email" required="" value="<?php echo $email; ?>"/>
-            <label for="cidade">Cidade</label><input type="text" class="w-input" maxlength="100" name="cidade" data-name="cidade" id="cidade" required="" value="<?php echo $cidade; ?>"/>
-            <label for="estado">Estado</label><input type="text" class="w-input" maxlength="2" name="estado" data-name="estado" id="estado" required="" value="<?php echo $estado; ?>"/>
-            <label for="cep">CEP</label><input type="text" class="w-input" maxlength="8" name="cep" data-name="cep" id="cep" required="" value="<?php echo $cep; ?>"/>
-            <input type="submit" value="Gravar" data-wait="Por favor, aguardar..." class="submit-button w-button" name="gravar"/>
+            <label for="disciplina">Disciplina</label>
+            <input type="text" class="w-input" maxlength="200" name="disciplina" data-name="disciplina" id="disciplina" required="" value="<?php echo $disciplina; ?>" <?php if(!empty($disciplina)){ echo "readonly='true'"; } ?>/>
+            <label for="professor">Professor(a)</label><input type="professor" class="w-input" maxlength="200" name="professor" data-name="professor" id="professor" required="" value="<?php echo $professor; ?>"/>
+            <label for="polo">Polo</label>
+            <select name="polo" class="w-select">
+                <option value=''></option>
+                <?php
+                $polos = new Polo();
+                $lista = $polos->getLista();
+                foreach($lista as $row){
+                    echo "<option value='";
+                    echo $row["codigo"]."'";
+                    if($polo == $row["codigo"]){ echo " selected "; }
+                    echo ">";
+                    echo $row["nome"];
+                    echo "</option>";
+                }
+                ?>
+            </select>
+            <input type="submit" value="Gravar" class="submit-button w-button" name="gravar"/>
         </form>
     </div>
 </div>
 
 <div class="container w-container">
-    <table>
-        <tr>
-            <th>Código</th>
-            <th>Nome do Polo</th>
-            <th>e-mail</th>
-            <th>Cidade</th>
-            <th>UF</th>
-            <th>CEP</th>
+&nbsp;
+</div>
+
+<div class="container w-container"> 
+    <table width="100%" style="border: 1px solid #1f683b; text-align: center; border-collapse: collapse;"> 
+        <tr style="font-size: 15px; font-weight: bold; color: #FFFFFF; background: #1f683b;">
+            <th style="padding: 3px 2px;">Código</th>
+            <th>Disciplina</th>
+            <th>Professor</th>
+            <th>Polo</th>
             <th>&nbsp;</th>
         </tr>
         <tr>
         <?php
-            $p = new Polo();
-            $resultado = $p->getLista();
+            $d = new Disciplina();
+            $resultado = $d->getLista();
+            $pl = new Polo();
             foreach($resultado as $linha){
-                echo "<tr>";
-                echo "<td>".$linha["codigo"]."</td>";
-                echo "<td>".$linha["nome"]."</td>";
-                echo "<td>".$linha["email"]."</td>";
-                echo "<td>".$linha["cidade"]."</td>";
-                echo "<td>".$linha["uf"]."</td>";
-                echo "<td>".$linha["cep"]."</td>";
-                echo "<td><a href='index.php?pagina=polos&codigo=".$linha["codigo"]."'>editar</a></td>";
+                echo "<tr style='font-size: 14px;'>";
+                echo "<td style='padding: 3px 2px;'>".$linha["codigo"]."</td>";
+                echo "<td>".$linha["disciplina"]."</td>";
+                echo "<td>".$linha["professor"]."</td>";
+                echo "<td>";
+                $pl->recuperaPolo($linha["polo"]);
+                echo $pl->getnome();
+                echo "</td>";
+                echo "<td><a href='index.php?pagina=disciplinas&codigo=".$linha["codigo"]."'>editar</a></td>";
                 echo "</tr>";
             }
         ?>

@@ -39,7 +39,7 @@ if(!empty($_POST["gravar"])){
 }
 ?>
 
-<h1 class="heading">Cadastro dos Alunos<br/>‍</h1>
+<h1 class="heading">Cadastro de Alunos<br/>‍</h1>
 <div class="container w-container">
     <div class="w-form">
         <form id="wf-form-frmAlunos" name="wf-form-frmAlunos" data-name="frmAlunos" method="post">
@@ -75,9 +75,13 @@ if(!empty($_POST["gravar"])){
 </div>
 
 <div class="container w-container">
-    <table>
-        <tr>
-            <th>Código</th>
+&nbsp;
+</div>
+
+<div class="container w-container">
+    <table width="100%" style="border: 1px solid #1f683b; text-align: center; border-collapse: collapse;">
+        <tr style="font-size: 15px; font-weight: bold; color: #FFFFFF; background: #1f683b;">
+            <th style="padding: 3px 2px;">Código</th>
             <th>CPF</th>
             <th>Nome</th>
             <th>Sobrenome</th>
@@ -91,8 +95,8 @@ if(!empty($_POST["gravar"])){
             $aa = new Aluno();
             $resultado = $aa->getLista();
             foreach($resultado as $linha){
-                echo "<tr>";
-                echo "<td>".$linha["id"]."</td>";
+                echo "<tr style='font-size: 14px;'>";
+                echo "<td style='padding: 3px 2px;'>".$linha["id"]."</td>";
                 echo "<td>".$linha["cpf"]."</td>";
                 echo "<td>".$linha["nome"]."</td>";
                 echo "<td>".$linha["sobrenome"]."</td>";
