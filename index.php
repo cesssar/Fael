@@ -5,10 +5,7 @@
     <meta charset="utf-8"/>
     <title>Fael</title>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="Webflow" name="generator"/>
     <link href="lib/css/fael.css" rel="stylesheet" type="text/css"/>
-    <script src="lib/js/webfont.js" type="text/javascript"></script>
-    <script type="text/javascript">WebFont.load({  google: {    families: ["Roboto:300,regular","Roboto Condensed:regular"]  }});</script>
     <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script>
     <![endif]-->
