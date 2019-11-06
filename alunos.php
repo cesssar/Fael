@@ -42,7 +42,7 @@ if(!empty($_POST["gravar"])){
 <h1 class="heading">Cadastro de Alunos<br/>‍</h1>
 <div class="container w-container">
     <div class="w-form">
-        <form id="wf-form-frmAlunos" name="wf-form-frmAlunos" data-name="frmAlunos" method="post">
+        <form id="wf-form-frmAlunos" name="wf-form-frmAlunos" data-name="frmAlunos" method="post" onsubmit="return validaAluno(this);">
             <?php
             //recupera dados do aluno para edição
             $a = null;
@@ -63,12 +63,12 @@ if(!empty($_POST["gravar"])){
                 $estado = $a->getUF();
             }
             ?>
-            <label for="cpf">CPF</label><input type="text" class="w-input" maxlength="11" name="cpf" data-name="cpf" id="cpf required="" value="<?php echo $cpf; ?>" <?php if(!empty($cpf)){ echo "readonly='true'"; } ?>/>
-            <label for="nome">Nome</label><input type="text" class="w-input" maxlength="100" name="nome" data-name="nome" id="nome-3" required="" value="<?php echo $nome; ?>"/>
-            <label for="sobrenome">Sobrenome</label><input type="text" class="w-input" maxlength="200" name="sobrenome" data-name="sobrenome" id="sobrenome" value="<?php echo $sobrenome; ?>"/>
-            <label for="nascimento">Data nascimento</label><input type="text" class="w-input" maxlength="10" name="nascimento" data-name="nascimento" id="nascimento" value="<?php if(!empty($nascimento)){ echo getDataBR($nascimento); } ?>"/>
-            <label for="cidade">Cidade</label><input type="text" class="w-input" maxlength="100" name="cidade" data-name="cidade" id="cidade" value="<?php echo $cidade; ?>"/>
-            <label for="estado">Estado</label><input type="text" class="w-input" maxlength="2" name="estado" data-name="estado" id="estado" value="<?php echo $estado; ?>"/>
+            <label for="cpf">CPF</label><input type="text" class="w-input" maxlength="11" name="cpf" onkeyup="maiuscula(this)" id="cpf required="" value="<?php echo $cpf; ?>" <?php if(!empty($cpf)){ echo "readonly='true'"; } ?>/>
+            <label for="nome">Nome</label><input type="text" class="w-input" maxlength="100" name="nome" onkeyup="maiuscula(this)" id="nome-3" required="" value="<?php echo $nome; ?>"/>
+            <label for="sobrenome">Sobrenome</label><input type="text" class="w-input" maxlength="200" name="sobrenome" onkeyup="maiuscula(this)" id="sobrenome" value="<?php echo $sobrenome; ?>"/>
+            <label for="nascimento">Data nascimento</label><input type="text" class="w-input" maxlength="10" name="nascimento" onkeyup="mascaraData(this)" id="nascimento" value="<?php if(!empty($nascimento)){ echo getDataBR($nascimento); } ?>"/>
+            <label for="cidade">Cidade</label><input type="text" class="w-input" maxlength="100" name="cidade" onkeyup="maiuscula(this)" id="cidade" value="<?php echo $cidade; ?>"/>
+            <label for="estado">Estado</label><input type="text" class="w-input" maxlength="2" name="estado" onkeyup="maiuscula(this)" id="estado" value="<?php echo $estado; ?>"/>
             <input type="submit" value="Gravar" name="gravar" class="submit-button w-button"/>
         </form>
     </div>

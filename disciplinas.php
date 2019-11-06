@@ -27,7 +27,7 @@ if(!empty($_POST["gravar"])){
 <h1 class="heading">Cadastro de Disciplinas<br/>‍</h1>
 <div class="container w-container">
     <div class="w-form">
-        <form id="wf-form-frmDisciplinas" name="wf-form-frmDisciplinas" data-name="frmDisciplinas" method="post" action="index.php?pagina=disciplinas">
+        <form id="wf-form-frmDisciplinas" name="wf-form-frmDisciplinas" data-name="frmDisciplinas" method="post" action="index.php?pagina=disciplinas" onsubmit="return validaDisciplina(this);">
             <?php
             //recupera dados da disciplina para edição
             $d = null;
@@ -45,8 +45,8 @@ if(!empty($_POST["gravar"])){
             }
             ?>
             <label for="disciplina">Disciplina</label>
-            <input type="text" class="w-input" maxlength="200" name="disciplina" data-name="disciplina" id="disciplina" required="" value="<?php echo $disciplina; ?>" <?php if(!empty($disciplina)){ echo "readonly='true'"; } ?>/>
-            <label for="professor">Professor(a)</label><input type="professor" class="w-input" maxlength="200" name="professor" data-name="professor" id="professor" required="" value="<?php echo $professor; ?>"/>
+            <input type="text" class="w-input" maxlength="200" name="disciplina" onkeyup="maiuscula(this)" id="disciplina" required="" value="<?php echo $disciplina; ?>" <?php if(!empty($disciplina)){ echo "readonly='true'"; } ?>/>
+            <label for="professor">Professor(a)</label><input type="text" class="w-input" maxlength="200" name="professor" onkeyup="maiuscula(this)" id="professor" required="" value="<?php echo $professor; ?>"/>
             <label for="polo">Polo</label>
             <select name="polo" class="w-select">
                 <option value=''></option>
