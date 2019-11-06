@@ -1,8 +1,8 @@
 <?php
+session_start();
+
 include('classes/crud.php');
 include('classes/usuario.php');
-
-session_start();
 
 $usuario = $_POST['usuario'];
 $senha = $_POST['senha'];

@@ -1,7 +1,5 @@
 <?php
 //volta para login se nao reconhecer usuario
-session_start();
-
 if(!isset($_SESSION['usuario'])){
     $_SESSION['msg'] = 'Por favor, faça seu login.';
     header('location:index.php?pagina=login');

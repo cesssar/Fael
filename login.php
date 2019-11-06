@@ -7,7 +7,6 @@
                     </form>
                 </div>
                 <?php
-                session_start();
                 if(!empty($_SESSION['msg'])){
                     echo '<pre>'.$_SESSION['msg'].'</pre>';
                     unset($_SESSION['msg']);

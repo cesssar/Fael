@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,20 +21,19 @@
                         <img src="img/logo_prog.png" width="70" alt=""/>
                     </a>
                     <?php
-                    session_start();
                     if(!empty($_SESSION['usuario'])){
                     ?>
                     <nav role="navigation" class="w-nav-menu">
                         <a href="index.php?pagina=polos" class="w-nav-link">Polos</a>
                         <a href="index.php?pagina=alunos" class="w-nav-link">Alunos</a>
                         <a href="index.php?pagina=disciplinas" class="w-nav-link">Disciplinas</a>
-                        <a href="index.php?pagina=sair" class="w-nav-link">Sair</a> 
+                        <a href="sair.php" class="w-nav-link">Sair</a> 
                     </nav>
                     <div class="w-nav-button">
                         <a href="index.php?pagina=polos" class="w-nav-link">Polos</a>
                         <a href="index.php?pagina=alunos" class="w-nav-link">Alunos</a>
                         <a href="index.php?pagina=disciplinas" class="w-nav-link">Disciplinas</a>
-                        <a href="index.php?pagina=sair" class="w-nav-link">Sair</a> 
+                        <a href="sair.php" class="w-nav-link">Sair</a> 
                     </div>
                     <?php
                     }
