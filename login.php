@@ -1,10 +1,3 @@
-<?php
-session_start();
-
-if($_SESSION['usuario']!=""){
-    header('location:index.php?pagina=polos');
-}
-?>
 
 <div class="container w-container">
                 <div class="sign-up-form w-form">
