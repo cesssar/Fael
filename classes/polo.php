@@ -60,7 +60,7 @@ class Polo{
 
     public function getLista(){
         $con = new Crud();
-        $resultado = $con->select("SELECT * FROM polos ORDER BY nome");
+        $resultado = $con->select("SELECT * FROM polos ORDER BY uf");
         return $resultado;
     }
 }

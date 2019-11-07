@@ -48,7 +48,7 @@ if(!empty($_POST["gravar"])){
             ?>
             <label for="nome">Nome do Polo</label>
             <input type="text" class="w-input" maxlength="100" name="nome" onkeyup="maiuscula(this)" id="nome" required="" value="<?php echo $nome; ?>" <?php if(!empty($nome)){ echo "readonly='true'"; } ?>/>
-            <label for="email">e-mail</label><input type="email" class="w-input" maxlength="100" name="email" onkeyup="maiuscula(this)" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="" value="<?php echo $email; ?>"/>
+            <label for="email">e-mail</label><input type="email" class="w-input" maxlength="100" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="" value="<?php echo $email; ?>"/>
             <label for="cidade">Cidade</label><input type="text" class="w-input" maxlength="100" name="cidade" onkeyup="maiuscula(this)" id="cidade" required="" value="<?php echo $cidade; ?>"/>
             <label for="estado">Estado</label><input type="text" class="w-input" maxlength="2" name="estado" onkeyup="maiuscula(this)" id="estado" required="" value="<?php echo $estado; ?>"/>
             <label for="cep">CEP</label><input type="text" class="w-input" maxlength="8" name="cep" onkeypress="return somenteNumeros(event)" id="cep" pattern="[0-9]+$" required="" value="<?php echo $cep; ?>"/>

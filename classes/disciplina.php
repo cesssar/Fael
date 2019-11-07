@@ -50,7 +50,7 @@ class Disciplina{
 
     public function getLista(){
         $con = new Crud();
-        $resultado = $con->select("SELECT * FROM disciplinas ORDER BY codigo");
+        $resultado = $con->select("SELECT * FROM disciplinas ORDER BY disciplina");
         return $resultado;
     }
 }

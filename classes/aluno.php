@@ -27,7 +27,7 @@ class Aluno{
     
     public function getLista(){
         $con = new Crud();
-        $resultado = $con->select("SELECT * FROM alunos ORDER BY id");
+        $resultado = $con->select("SELECT * FROM alunos ORDER BY nome");
         return $resultado;
     }
 

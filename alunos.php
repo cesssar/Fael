@@ -61,7 +61,7 @@ if(!empty($_POST["gravar"])){
                 $estado = $a->getUF();
             }
             ?>
-            <label for="cpf">CPF</label><input type="text" class="w-input" maxlength="11" name="cpf" onkeyup="maiuscula(this)" id="cpf required="" value="<?php echo $cpf; ?>" <?php if(!empty($cpf)){ echo "readonly='true'"; } ?>/>
+            <label for="cpf">CPF</label><input type="text" class="w-input" maxlength="11" name="cpf" onkeypress="return somenteNumeros(event)" id="cpf required="" value="<?php echo $cpf; ?>" <?php if(!empty($cpf)){ echo "readonly='true'"; } ?>/>
             <label for="nome">Nome</label><input type="text" class="w-input" maxlength="100" name="nome" onkeyup="maiuscula(this)" id="nome-3" required="" value="<?php echo $nome; ?>"/>
             <label for="sobrenome">Sobrenome</label><input type="text" class="w-input" maxlength="200" name="sobrenome" onkeyup="maiuscula(this)" id="sobrenome" value="<?php echo $sobrenome; ?>"/>
             <label for="nascimento">Data nascimento</label><input type="text" class="w-input" maxlength="10" name="nascimento" onkeyup="mascaraData(this)" id="nascimento" value="<?php if(!empty($nascimento)){ echo getDataBR($nascimento); } ?>"/>

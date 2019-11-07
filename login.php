@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if($_SESSION['usuario']!=""){
+    header('location:index.php?pagina=polos');
+}
+?>
+
 <div class="container w-container">
                 <div class="sign-up-form w-form">
                     <form name="frmLogin" class="w-clearfix" action="valida_usuario.php" method="post" onsubmit="return validar(this);">
